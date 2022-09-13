@@ -1,3 +1,4 @@
+from os import system
 from pathlib import Path
 from getpass import getpass
 from imaplib import IMAP4_SSL
@@ -19,8 +20,9 @@ class GetEmailData:
 
 
     def login(self) -> None: 
-        self.imap = IMAP4_SSL(self.server)
         password = getpass('Contraseña:\n')
+        system('clear')
+        self.imap = IMAP4_SSL(self.server)
         self.imap.login(self.user_email, password)
 
 
