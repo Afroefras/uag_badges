@@ -1,4 +1,3 @@
-from os import system
 from pathlib import Path
 from getpass import getpass
 from imaplib import IMAP4_SSL
@@ -11,17 +10,16 @@ class GetEmailData:
         or check this page: https://www.systoolsgroup.com/imap/
         for office 365, it's outlook.office365.com
         '''
-        self.username = username
-        self.domain = domain
-        self.user_email = self.username + self.domain
         self.server = server
-        self.date_from = date_from
-        self.date_to = date_to
+        self.domain = domain.lower()
+        self.username = username.lower()
+        self.user_email = self.username + self.domain
+        self.date_from = date_from.lower()
+        self.date_to = date_to.lower()
 
 
     def login(self) -> None: 
         password = getpass('Contraseña:\n')
-        system('clear')
         self.imap = IMAP4_SSL(self.server)
         self.imap.login(self.user_email, password)
 
@@ -33,9 +31,27 @@ class GetEmailData:
         return all_folders
 
 
+    def get_month(self, to_check: str, date_sep: str) -> str:
+        date_day, date_month, date_year = to_check.split(date_sep)
+        date_month = date_month[:3]
+
+        switch_eng = {
+            'ene':'jan',
+            'abr':'apr',
+            'ago':'aug',
+            'dic':'dec',
+        }
+        if date_month in switch_eng: date_month = switch_eng[date_month]
+        return date_day+date_sep+date_month+date_sep+date_year
+
+
     def filter_msg_dates(self, filter_from: str) -> None:
         self.imap.select(filter_from)
+
+        for date_check in (self.date_from, self.date_to):
+            date_check = self.get_month(date_check, date_sep='-')
         to_filter = f'(SINCE "{self.date_from}" BEFORE "{self.date_to}")'
+
         _, filter_uids = self.imap.uid('search', None, to_filter)
         self.uids = filter_uids[0].split()
         self.uids = set(self.uids)
