@@ -14,3 +14,10 @@ class CredencialesUAG(GetEmailData, TransformData):
         self.date_vars(**kwargs)
         self.last_email()
         self.last_picture()
+
+if __name__ == '__main__':
+    user = input('user: ')
+    cuag = CredencialesUAG(user, date_from='08-sep-2022', date_to='10-sep-2022')
+    cuag.get_data(get_from='INBOX', create_user_folder=False)
+    cuag.transform_data(col_from='from', date_col='date', timezone='America/Mexico_City')
+    print(cuag.df.head())
