@@ -1,5 +1,5 @@
-from get_email_data import GetEmailData
-from transform_data import TransformData
+from .get_email_data import GetEmailData
+from .transform_data import TransformData
 
 class CredencialesUAG(GetEmailData, TransformData):
     def get_data(self, get_from: str, create_user_folder: bool) -> None:

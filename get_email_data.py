@@ -33,6 +33,7 @@ class GetEmailData:
 
     def get_month(self, to_check: str, date_sep: str) -> str:
         date_day, date_month, date_year = to_check.split(date_sep)
+        date_day = date_day.zfill(2)
         date_month = date_month[:3]
 
         switch_eng = {
