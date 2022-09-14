@@ -11,7 +11,7 @@ En este [Colab](https://colab.research.google.com/drive/1fNgV-kOV78WTfJpHRH98-Ar
 - [ ] [Puesta en producción](#Puesta-en-producción) (En progreso ...)
 
 <br>
---------------------------------------------------------------------------------------------
+- - - -
 <br>
 
 # Repositorio:
@@ -29,53 +29,14 @@ En este [Colab](https://colab.research.google.com/drive/1fNgV-kOV78WTfJpHRH98-Ar
 
 # Extracción
 
-1. El método
-```python
-CredencialesUAG.get_data()
-```
+El método`CredencialesUAG.get_data()`
 ejecuta estos pasos:
-    i. 
-    ii.
+    i. `self.login()` que solicita la contraseña al usuario (no se muestra)
+    ii. `self.filter_msg_dates(filter_from='INBOX')` para seleccionar la bandeja de entrada y el rango de fechas indicado
+    iii. `self.create_files_dir(create_user_folder=False)` crea el folder con nombre: *"fecha inicial a fecha final"*
+    iv. `self.get_files()` descarga todos los archivos adjuntos en la carpeta y fechas indicadas
+    v. `self.finish_session()` cierra la sesión del correo electrónico
 
-([este artículo](https://canovasjm.netlify.app/2021/01/12/github-secrets-from-python-and-r/) me ayudó mucho a entender GitHub Secrets, para guardar y usar credenciales automáticamente mediante un workflow .yml, si fuera el caso)
-
-<br><br>
-
-2. Así, puedes instanciar la clase para obtener los datos al momento
-```python
-from map import EcoBiciMap
-
-ebm = EcoBiciMap(CLIENT_ID, CLIENT_SECRET)
-
-# Con las credenciales se inicia la sesión y se obtiene el token de acceso
-ebm.get_token(first_time=True)
-```
-
-<br><br>
-
-
-3. Se puede extraer información respecto a las estaciones, incluyendo coordenadas
-```python
-ebm.get_data()
-```
-|id|name|address|addressNumber|zipCode|districtCode|districtName|altitude|nearbyStations|stationType|location.lat|location.lon|
-|---|---|---|---|---|---|---|---|---|---|---|---|
-|55|55 5 DE MAYO-BOLIVAR|055 - 5 de Mayo - Bolívar|S/N|6700|1|Ampliación Granada|None|[65, 87]|BIKE,TPV|19.434356|-99.138064|
-|124|124 CLAUDIO BERNARD-DR. LICEAGA|124 - Claudio Bernard-Dr. Liceaga|S/N|6500|1|Ampliación Granada|None|[119, 123, 133]|BIKE|19.422392|-99.150358|
-|159|159 HUATABAMPO-EJE 1 PTE. AV. CUAUHTÉMOC|159 - Huatabampo-Eje 1 Pte. Av. Cuauhtémoc|S/N|6760|1|Ampliación Granada|None|[155, 158, 163]|BIKE|19.407517|-99.155373|
-
-<br><br>
-
-
-4. Y también la disponibilidad de las estaciones (mismo método pero especificando un parámetro)
-```python
-ebm.get_data(availability=True)
-```
-|id|status|availability.bikes|availability.slots|
-|---|---|---|---|
-|55|OPN|13|10|
-|124|OPN|0|21|
-|159|OPN|1|34|
 
 <br><br>
 
