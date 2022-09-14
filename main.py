@@ -20,6 +20,7 @@ class CredencialesUAG(GetEmailData, TransformData):
         self.just_img(valid_ext=['png','jpg','jpeg'])
         self.last_email()
         self.last_img()
+        self.convert_png()
 
 if __name__ == '__main__':
     # user = input('Usuario: ')

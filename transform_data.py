@@ -1,6 +1,7 @@
 from re import findall
 from dateutil import tz
 from pandas import DataFrame, to_datetime
+from PIL.Image import open as open_img, new as new_img
 
 
 class TransformData:
@@ -34,3 +35,28 @@ class TransformData:
         for pic in all_imgs:
             if pic.is_file() and pic not in valid_imgs:
                 pic.unlink()
+
+    
+    def png_to_jpg(self, img_dir: str, img_name: str) -> None:
+        png = open_img(img_dir.joinpath(img_name)).convert('RGBA')
+        png.load()
+
+        jpg = new_img("RGB", png.size, (255, 255, 255))
+        jpg.paste(png, mask=png.split()[3])
+
+        jpg_name = ''.join(img_name.split('.')[:-1])+'.jpg'
+        jpg.save(img_dir.joinpath(jpg_name), 'JPEG', quality=100)
+        return jpg_name
+
+
+    def convert_png(self) -> None:
+        jpg_info = []
+        for img_name, img_ext in zip(self.df['filename'], self.df['file_ext']):
+            if img_ext=='png':
+                jpg_name = self.png_to_jpg(self.files_dir, img_name)
+                self.files_dir.joinpath(img_name).unlink()
+                jpg_info.append((False, jpg_name, self.files_dir.joinpath(jpg_name)))
+            else: 
+                jpg_info.append((True, img_name, self.files_dir.joinpath(img_name)))
+        
+        self.df[['is_jpg','filename','file_dir']] = jpg_info
