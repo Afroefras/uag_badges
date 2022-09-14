@@ -1,12 +1,14 @@
 <h1 align='center'>Credenciales UAG</h1>
 <h3 align='center'>Extracción e validación</h1>
 
+En este [Colab](https://colab.research.google.com/drive/1fNgV-kOV78WTfJpHRH98-ArWTNuAvNDX?usp=sharing) se clona el repositorio para correr los métodos necesarios de extracción y transformación/limpieza de datos. Pruébalo!
+
 # Índice
-1. [Repositorio](#Repositorio)
-2. [Extracción](#Extracción)
-3. [Transformación](#Transformación)
-4. [Modelos](#Modelos)
-5. [Puesta en producción](#Puesta-en-producción) (En progreso ...)
+- [x] [Repositorio](#Repositorio)
+- [x] [Extracción](#Extracción)
+- [x] [Transformación](#Transformación)
+- [ ] [Modelos](#Modelos)
+- [ ] [Puesta en producción](#Puesta-en-producción) (En progreso ...)
 
 <br>
 --------------------------------------------------------------------------------------------
@@ -16,9 +18,9 @@
     .
     ├── __init__.py             # Para que el directorio se trabaje de forma modular
     │
-    ├── main.py                 # Para que el directorio se trabaje de forma modular
-    ├── get_email_data.py       # Para que el directorio se trabaje de forma modular
-    ├── transform.py            # Para que el directorio se trabaje de forma modular
+    ├── main.py                 # Hereda GetEmailData y TransformData para obtener y limpiar las imágenes
+    ├── get_email_data.py       # Permite iniciar sesión en @edu.uag.mx para importar todas las imágenes adjuntas en la bandeja de entrada de un rango específico de fechas
+    ├── transform.py            # Limpia los datos y crea variables de utilidad
     │
     └── requirements.txt        # Instalar las librerías necesarias con el comando: pip install -r requirements.txt
 
@@ -27,7 +29,11 @@
 
 # Extracción
 
-1. El primer paso es registrarte para la API [aquí](https://www.ecobici.cdmx.gob.mx/es/informacion-del-servicio/open-data), recibirás un correo con tus credenciales: CLIENT_ID y CLIENT_SECRET (guárdalas muy bien, donde nadie las encuentre)
+1. El método ```python
+CredencialesUAG.get_data()
+``` ejecuta estos pasos:
+    i. 
+    ii.
 
 ([este artículo](https://canovasjm.netlify.app/2021/01/12/github-secrets-from-python-and-r/) me ayudó mucho a entender GitHub Secrets, para guardar y usar credenciales automáticamente mediante un workflow .yml, si fuera el caso)
 
