@@ -29,9 +29,11 @@ En este [Colab](https://colab.research.google.com/drive/1fNgV-kOV78WTfJpHRH98-Ar
 
 # Extracción
 
-1. El método ```python
+1. El método
+```python
 CredencialesUAG.get_data()
-``` ejecuta estos pasos:
+```
+ejecuta estos pasos:
     i. 
     ii.
 
