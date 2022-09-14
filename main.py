@@ -1,5 +1,10 @@
-from .get_email_data import GetEmailData
-from .transform_data import TransformData
+try: 
+    from .get_email_data import GetEmailData
+    from .transform_data import TransformData
+except ImportError: 
+    from get_email_data import GetEmailData
+    from transform_data import TransformData
+
 
 class CredencialesUAG(GetEmailData, TransformData):
     def get_data(self, get_from: str, create_user_folder: bool) -> None:
@@ -16,8 +21,14 @@ class CredencialesUAG(GetEmailData, TransformData):
         self.last_picture()
 
 if __name__ == '__main__':
-    user = input('Usuario: ')
-    cuag = CredencialesUAG(user, date_from='08-sep-2022', date_to='10-sep-2022')
+    # user = input('Usuario: ')
+    user = 'efrain.flores'
+    cuag = CredencialesUAG(user, date_from='14-sep-2022', date_to='14-sep-2022')
     cuag.get_data(get_from='INBOX', create_user_folder=False)
     cuag.transform_data(col_from='from', date_col='date', timezone='America/Mexico_City')
     print(cuag.df.head())
+
+
+# Sumar un día al filtro de fechas
+# Sólo imágenes
+# Todas a jpeg

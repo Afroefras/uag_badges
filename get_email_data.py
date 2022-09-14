@@ -2,6 +2,8 @@ from pathlib import Path
 from getpass import getpass
 from imaplib import IMAP4_SSL
 from email import message_from_bytes
+from datetime import datetime, timedelta
+
 
 class GetEmailData:
     def __init__(self, username: str, date_from: str, date_to: str, domain: str='@edu.uag.mx', server: str='outlook.office365.com') -> None:
@@ -45,12 +47,21 @@ class GetEmailData:
         if date_month in switch_eng: date_month = switch_eng[date_month]
         return date_day+date_sep+date_month+date_sep+date_year
 
+    
+    def add_n_days(self, date_to_sum: str, date_format: str, n_days: int) -> str:
+        date = datetime.strptime(date_to_sum, date_format)
+        date += timedelta(days=int(n_days))
+        date = datetime.strftime(date, date_format)
+        return date
+
 
     def filter_msg_dates(self, filter_from: str) -> None:
         self.imap.select(filter_from)
 
         for date_check in (self.date_from, self.date_to):
             date_check = self.get_month(date_check, date_sep='-')
+
+        self.date_to = self.add_n_days(self.date_to, date_format=r'%d-%b-%Y', n_days=1)
         to_filter = f'(SINCE "{self.date_from}" BEFORE "{self.date_to}")'
 
         _, filter_uids = self.imap.uid('search', None, to_filter)
@@ -97,6 +108,7 @@ class GetEmailData:
 
                     with open(file_dir, 'wb') as f:
                         f.write(msg_part.get_payload(decode=True))
+
 
     def finish_session(self) -> None:
         self.imap.close()
