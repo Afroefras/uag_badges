@@ -1,5 +1,5 @@
 <h1 align='center'>Credenciales UAG</h1>
-<h3 align='center'>Extracción e validación</h1>
+<h3 align='center'>Extracción e validación</h3>
 
 En este [Colab](https://colab.research.google.com/drive/1fNgV-kOV78WTfJpHRH98-ArWTNuAvNDX?usp=sharing) se clona el repositorio para correr los métodos necesarios de extracción y transformación/limpieza de datos. Pruébalo!
 
@@ -31,11 +31,11 @@ En este [Colab](https://colab.research.google.com/drive/1fNgV-kOV78WTfJpHRH98-Ar
 
 El método`CredencialesUAG.get_data()`
 ejecuta estos pasos:
-    1. `self.login()` que solicita la contraseña al usuario (no se muestra)
-    2. `self.filter_msg_dates(filter_from='INBOX')` para seleccionar la bandeja de entrada y el rango de fechas indicado
-    3. `self.create_files_dir(create_user_folder=False)` crea el folder con nombre: *"fecha inicial a fecha final"*
-    4. `self.get_files()` descarga todos los archivos adjuntos en la carpeta y fechas indicadas, además de guardar información relevante en una lista de diccionarios
-    5. `self.finish_session()` cierra la sesión del correo electrónico
+1. `self.login()` que solicita la contraseña al usuario (no se muestra)
+2. `self.filter_msg_dates(filter_from='INBOX')` para seleccionar la bandeja de entrada y el rango de fechas indicado
+3. `self.create_files_dir(create_user_folder=False)` crea el folder con nombre: *"fecha inicial a fecha final"*
+4. `self.get_files()` descarga todos los archivos adjuntos en la carpeta y fechas indicadas, además de guardar información relevante en una lista de diccionarios
+5. `self.finish_session()` cierra la sesión del correo electrónico
 
 
 <br><br>
