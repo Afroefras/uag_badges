@@ -11,7 +11,9 @@ En este [notebook en Google Colab](https://colab.research.google.com/drive/1fNgV
 - [ ] [Puesta en producción](#Puesta-en-producción) (En progreso ...)
 
 <br>
+
 ---
+
 <br>
 
 # Repositorio:
