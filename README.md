@@ -45,12 +45,12 @@ ejecuta estos pasos:
 
 El método`CredencialesUAG.transform_data()`
 ejecuta estos pasos:
-    1. `self.get_email(col_from='from')` convierte la lista de información relevante en un DataFrame y crea una columna con sólo el email del remitente
-    2. `self.date_vars(date_col='date', timezone='America/Mexico_City')` crea variables implícitas a la fecha como año, mes, día, semana, etc
-    3. `self.just_img(valid_ext=['png','jpg','jpeg'])` filtra los registros con extensión válida en el nombre del archivo adjunto
-    4. `self.last_email()` se queda únicamente con el último correo de cada email
-    5. `self.last_img()` elimina las imágenes que no corresponden al último correo por email recibido
-    6. `self.convert_png()` si hay imágenes con extensión *".png"* las convierte a *".jpg"*
+1. `self.get_email(col_from='from')` convierte la lista de información relevante en un DataFrame y crea una columna con sólo el email del remitente
+2. `self.date_vars(date_col='date', timezone='America/Mexico_City')` crea variables implícitas a la fecha como año, mes, día, semana, etc
+3. `self.just_img(valid_ext=['png','jpg','jpeg'])` filtra los registros con extensión válida en el nombre del archivo adjunto
+4. `self.last_email()` se queda únicamente con el último correo de cada email
+5. `self.last_img()` elimina las imágenes que no corresponden al último correo por email recibido
+6. `self.convert_png()` si hay imágenes con extensión *".png"* las convierte a *".jpg"*
     
 El resultado de este método es:
 |    |   id | date                      | from                                    | subject                    | filename             | file_dir                                                 | email                    |   date_year |   date_month |   date_day |   date_dayofweek |   date_hour |   date_minute |   date_second | file_ext   | is_jpg   |
