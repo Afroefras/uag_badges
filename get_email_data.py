@@ -61,8 +61,8 @@ class GetEmailData:
         for date_check in (self.date_from, self.date_to):
             date_check = self.get_month(date_check, date_sep='-')
 
-        self.date_to = self.add_n_days(self.date_to, date_format=r'%d-%b-%Y', n_days=1)
-        to_filter = f'(SINCE "{self.date_from}" BEFORE "{self.date_to}")'
+        _date_to = self.add_n_days(self.date_to, date_format=r'%d-%b-%Y', n_days=1)
+        to_filter = f'(SINCE "{self.date_from}" BEFORE "{_date_to}")'
 
         _, filter_uids = self.imap.uid('search', None, to_filter)
         self.uids = filter_uids[0].split()
@@ -89,7 +89,6 @@ class GetEmailData:
 
             if message_parts.get_content_maintype() == 'multipart':
                 for msg_part in message_parts.walk():
-                    #find the attachment part
                     if msg_part.get_content_maintype() == 'multipart': continue
                     if msg_part.get('Content-Disposition') is None: continue
 

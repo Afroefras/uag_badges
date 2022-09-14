@@ -7,28 +7,24 @@ except ImportError:
 
 
 class CredencialesUAG(GetEmailData, TransformData):
-    def get_data(self, get_from: str, create_user_folder: bool) -> None:
+    def get_data(self) -> None:
         self.login()        
-        self.filter_msg_dates(filter_from=get_from)
-        self.create_files_dir(create_user_folder=create_user_folder)
+        self.filter_msg_dates(filter_from='INBOX')
+        self.create_files_dir(create_user_folder=False)
         self.get_files()
         self.finish_session()
 
-    def transform_data(self, col_from: str, **kwargs) -> None:
-        self.get_email(col_from=col_from)
-        self.date_vars(**kwargs)
+    def transform_data(self) -> None:
+        self.get_email(col_from='from')
+        self.date_vars(date_col='date', timezone='America/Mexico_City')
+        self.just_img(valid_ext=['png','jpg','jpeg'])
         self.last_email()
-        self.last_picture()
+        self.last_img()
 
 if __name__ == '__main__':
     # user = input('Usuario: ')
     user = 'efrain.flores'
     cuag = CredencialesUAG(user, date_from='14-sep-2022', date_to='14-sep-2022')
-    cuag.get_data(get_from='INBOX', create_user_folder=False)
-    cuag.transform_data(col_from='from', date_col='date', timezone='America/Mexico_City')
+    cuag.get_data()
+    cuag.transform_data()
     print(cuag.df.head())
-
-
-# Sumar un día al filtro de fechas
-# Sólo imágenes
-# Todas a jpeg
