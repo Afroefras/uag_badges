@@ -1,5 +1,5 @@
 <h1 align='center'>Credenciales UAG</h1>
-<h3 align='center'>Extracción e validación</h3>
+<h3 align='center'>Extracción y validación</h3>
 
 En este [notebook en Google Colab](https://colab.research.google.com/drive/1fNgV-kOV78WTfJpHRH98-ArWTNuAvNDX?usp=sharing) se clona el repositorio para correr los métodos necesarios de extracción y transformación/limpieza de datos. Pruébalo!
 
@@ -54,17 +54,16 @@ ejecuta estos pasos:
     
 El resultado de este método es:
 |   id | date                      | from                                    | subject                    | filename             | file_dir                                                 | email                    |   date_year |   date_month |   date_day |   date_dayofweek |   date_hour |   date_minute |   date_second | file_ext   | is_jpg   |
-|---:|-----:|:--------------------------|:----------------------------------------|:---------------------------|:---------------------|:---------------------------------------------------------|:-------------------------|------------:|-------------:|-----------:|-----------------:|------------:|--------------:|--------------:|:-----------|:---------|
+|-----:|:--------------------------|:----------------------------------------|:---------------------------|:---------------------|:---------------------------------------------------------|:-------------------------|------------:|-------------:|-----------:|-----------------:|------------:|--------------:|--------------:|:-----------|:---------|
 |  002 | 2022-09-14 11:46:01-05:00 | Diego Flores <floresca.diego@gmail.com> | foto                       | 002DataRoles.jpg     | /content/08-sep-2022 to 14-sep-2022/002DataRoles.jpg     | floresca.diego@gmail.com |        2022 |            9 |         14 |                2 |          11 |            46 |             1 | png        | False    |
 |  005 | 2022-09-09 13:26:44-05:00 | Efra Flores <efraisma.ef7@gmail.com>    | Re: TEST CON FOTO CORRECTA | 005EF_credencial.jpg | /content/08-sep-2022 to 14-sep-2022/005EF_credencial.jpg | efraisma.ef7@gmail.com   |        2022 |            9 |          9 |                4 |          13 |            26 |            44 | png        | False    |
 
 <br><br>
 
 # Modelos
+***(EN PROGRESO...)***
 
-*(EN PROGRESO...)*
-
-La idea es entrenar y aplicar 3 modelos:
+La idea es entrenar y aplicar 3 modelos que respondan:
 1. ¿La persona trae lentes?
 2. ¿Está mirando al frente (no selfies)?
 3. ¿Tiene fondo blanco?
@@ -72,8 +71,7 @@ La idea es entrenar y aplicar 3 modelos:
 <br><br>
 
 # Puesta en producción 
-
-*(EN PROGRESO...)*
+***(EN PROGRESO...)***
 
 La idea es que en el [notebook en Google Colab](https://colab.research.google.com/drive/1fNgV-kOV78WTfJpHRH98-ArWTNuAvNDX?usp=sharing) la cuenta credenciales@edu.uag.mx pueda:
 1. Obtener las fotos que cumplan con las características correctas
