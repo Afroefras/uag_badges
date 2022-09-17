@@ -7,8 +7,8 @@ En este [notebook en Google Colab](https://colab.research.google.com/drive/1fNgV
 - [x] [Repositorio](#Repositorio)
 - [x] [Extracción](#Extracción)
 - [x] [Transformación](#Transformación)
-- [ ] [Modelos](#Modelos)
-- [ ] [Puesta en producción](#Puesta-en-producción) (En progreso ...)
+- [ ] [Modelos](#Modelos) (en progreso ... )
+- [ ] [Puesta en producción](#Puesta-en-producción) (en progreso ... )
 
 <br>
 
