@@ -7,7 +7,9 @@ En este [notebook en Google Colab](https://colab.research.google.com/drive/1fNgV
 - [x] [Repositorio](#Repositorio)
 - [x] [Extracción](#Extracción)
 - [x] [Transformación](#Transformación)
-- [ ] [Modelos](#Modelos) (en progreso ... )
+- [ ] [Modelos](#Modelos)
+- [x]       [¿La persona NO trae lentes?](##¿La persona NO trae lentes?) 
+- [ ]       [¿La persona NO trae lentes?](##¿La persona NO trae lentes?) (en progreso ... )
 - [ ] [Puesta en producción](#Puesta-en-producción) (en progreso ... )
 
 <br>
@@ -55,20 +57,24 @@ ejecuta estos pasos:
 6. `self.convert_png()` si hay imágenes con extensión *".png"* las convierte a *".jpg"*
     
 El resultado de este método es:
-|   id | date                      | from                                    | subject                    | filename             | file_dir                                                 | email                    |   date_year |   date_month |   date_day |   date_dayofweek |   date_hour |   date_minute |   date_second | file_ext   | is_jpg   |
-|-----:|:--------------------------|:----------------------------------------|:---------------------------|:---------------------|:---------------------------------------------------------|:-------------------------|------------:|-------------:|-----------:|-----------------:|------------:|--------------:|--------------:|:-----------|:---------|
-|  002 | 2022-09-14 11:46:01-05:00 | Diego Flores <floresca.diego@gmail.com> | foto                       | 002DataRoles.jpg     | /content/08-sep-2022 to 14-sep-2022/002DataRoles.jpg     | floresca.diego@gmail.com |        2022 |            9 |         14 |                2 |          11 |            46 |             1 | png        | False    |
-|  005 | 2022-09-09 13:26:44-05:00 | Efra Flores <efraisma.ef7@gmail.com>    | Re: TEST CON FOTO CORRECTA | 005EF_credencial.jpg | /content/08-sep-2022 to 14-sep-2022/005EF_credencial.jpg | efraisma.ef7@gmail.com   |        2022 |            9 |          9 |                4 |          13 |            26 |            44 | png        | False    |
+
+|    |   id | date                      | from                                    | subject                  | filename            | file_dir                                                | email                    |   date_year |   date_month |   date_day |   date_dayofweek |   date_hour |   date_minute |   date_second | file_ext   | is_jpg   |
+|---:|-----:|:--------------------------|:----------------------------------------|:-------------------------|:--------------------|:--------------------------------------------------------|:-------------------------|------------:|-------------:|-----------:|-----------------:|------------:|--------------:|--------------:|:-----------|:---------|
+|  0 |  001 | 2022-09-21 16:18:38-05:00 | Diego Flores <floresca.diego@gmail.com> | .i.                      | 001Diego Flores.jpg | /content/08-sep-2022 to 21-sep-2022/001Diego Flores.jpg | floresca.diego@gmail.com |        2022 |            9 |         21 |                2 |          16 |            18 |            38 | png        | False    |
+|  5 |  007 | 2022-09-21 16:09:51-05:00 | Efra Flores <efraisma.ef7@gmail.com>    | TEST CON FOTO INCORRECTA | 007lentes.jpeg      | /content/08-sep-2022 to 21-sep-2022/007lentes.jpeg      | efraisma.ef7@gmail.com   |        2022 |            9 |         21 |                2 |          16 |             9 |            51 | jpeg       | True     |
 
 <br><br>
 
 # Modelos
 ***(EN PROGRESO...)***
 
-La idea es entrenar y aplicar 3 modelos que respondan:
-1. ¿La persona trae lentes?
-2. ¿Está mirando al frente (no selfies)?
-3. ¿Tiene fondo blanco?
+## ¿La persona NO trae lentes?
+
+|    |   id |   no_glasses_proba |   no_glasses |
+|---:|-----:|-------------------:|-------------:|
+|  0 |  001 |           0.842446 |            1 |
+|  5 |  007 |           0.204064 |            0 |
+
 
 <br><br>
 
