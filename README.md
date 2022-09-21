@@ -8,8 +8,8 @@ En este [notebook en Google Colab](https://colab.research.google.com/drive/1fNgV
 - [x] [Extracción](#Extracción)
 - [x] [Transformación](#Transformación)
 - [ ] [Modelos](#Modelos)
-- [x]       [¿La persona NO trae lentes?](##¿La persona NO trae lentes?) 
-- [ ]       [¿La persona NO trae lentes?](##¿La persona NO trae lentes?) (en progreso ... )
+- [x]       [¿La persona NO trae lentes?](#¿La persona NO trae lentes?) 
+- [ ]       [Aplicar fondo blanco](#Aplicar fondo blanco) (en progreso ... )
 - [ ] [Puesta en producción](#Puesta-en-producción) (en progreso ... )
 
 <br>
@@ -66,7 +66,6 @@ El resultado de este método es:
 <br><br>
 
 # Modelos
-***(EN PROGRESO...)***
 
 ## ¿La persona NO trae lentes?
 
@@ -75,6 +74,8 @@ El resultado de este método es:
 |  0 |  001 |           0.842446 |            1 |
 |  5 |  007 |           0.204064 |            0 |
 
+## Aplicar fondo blanco 
+***(EN PROGRESO...)***
 
 <br><br>
 
