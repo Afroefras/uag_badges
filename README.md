@@ -8,8 +8,8 @@ En este [notebook en Google Colab](https://colab.research.google.com/drive/1fNgV
 - [x] [Extracción](#Extracción)
 - [x] [Transformación](#Transformación)
 - [ ] [Modelos](#Modelos)
-- [x]       [¿La persona NO trae lentes?](#¿La persona NO trae lentes?) 
-- [ ]       [Aplicar fondo blanco](#Aplicar fondo blanco) (en progreso ... )
+- [x]       [¿La persona NO trae lentes?]
+- [ ]       [Aplicar fondo blanco] (en progreso ... )
 - [ ] [Puesta en producción](#Puesta-en-producción) (en progreso ... )
 
 <br>
@@ -69,10 +69,20 @@ El resultado de este método es:
 
 ## ¿La persona NO trae lentes?
 
-|    |   id |   no_glasses_proba |   no_glasses |
-|---:|-----:|-------------------:|-------------:|
-|  0 |  001 |           0.842446 |            1 |
-|  5 |  007 |           0.204064 |            0 |
+Se ocuparon [imágenes](https://www.kaggle.com/datasets/jorgebuenoperez/datacleaningglassesnoglasses) (creadas artificialmente) de personas con lentes y sin lentes, para poder replicar el transfer-learning de MobileNet-v2 (que es una Red Neuronal Convolucional profunda con 53 capas) para clasificar las imágenes, tal como lo explica [Jorge Bueno](https://www.kaggle.com/jorgebuenoperez) en su [notebook](https://www.kaggle.com/code/jorgebuenoperez/computer-vision-application-of-cnn/notebook).
+
+El modelo con [99.41%](https://colab.research.google.com/drive/1umulctdWTtWoVvkoNSEqk5pd4Be4eL8A?usp=sharing) en el conjunto de validación, se exporta a Google Drive y se comprime para que a través del método heredado en la Clase principal, el modelo se pueda importar al [notebook](https://colab.research.google.com/drive/1fNgV-kOV78WTfJpHRH98-ArWTNuAvNDX?usp=sharing) en Google Colab y aplicarse para cada una de las imágenes adjuntas en los correos recibidos.
+
+Así, el DataFrame ahora tiene dos columnas adicionales, que indican:
+1. La probabilidad de que la persona NO tenga lentes y 
+2. La transformación binaria redondeando dicha probabilidad
+
+|    |   id |...|   no_glasses_proba |   no_glasses |
+|---:|-----:|--:|-------------------:|-------------:|
+|  0 |  001 |...|           0.842446 |            1 |
+|  5 |  007 |...|           0.204064 |            0 |
+
+<br><br>
 
 ## Aplicar fondo blanco 
 ***(EN PROGRESO...)***
@@ -82,6 +92,6 @@ El resultado de este método es:
 # Puesta en producción 
 ***(EN PROGRESO...)***
 
-La idea es que en el [notebook en Google Colab](https://colab.research.google.com/drive/1fNgV-kOV78WTfJpHRH98-ArWTNuAvNDX?usp=sharing) la cuenta credenciales@edu.uag.mx pueda:
+La idea es que en el [notebook](https://colab.research.google.com/drive/1fNgV-kOV78WTfJpHRH98-ArWTNuAvNDX?usp=sharing) en Google Colab la cuenta credenciales@edu.uag.mx pueda:
 1. Obtener las fotos que cumplan con las características correctas
 2. Mandar respuesta a los correos con imágenes que no cumplan con las características
