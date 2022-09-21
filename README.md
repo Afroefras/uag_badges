@@ -9,8 +9,8 @@ En este [notebook en Google Colab](https://colab.research.google.com/drive/1fNgV
 - [x] [Extracción](#Extracción)
 - [x] [Transformación](#Transformación)
 - [ ] [Modelos](#Modelos)
-- [x]       ¿La persona NO trae lentes?
-- [ ]       Aplicar fondo blanco (en progreso ... )
+- [x] ---- ¿La persona NO trae lentes?
+- [ ] ---- Aplicar fondo blanco (en progreso ... )
 - [ ] [Puesta en producción](#Puesta-en-producción) (en progreso ... )
 
 <br>
