@@ -1,15 +1,16 @@
 <h1 align='center'>Credenciales UAG</h1>
 <h3 align='center'>Extracción y validación</h3>
 
-En este [notebook en Google Colab](https://colab.research.google.com/drive/1fNgV-kOV78WTfJpHRH98-ArWTNuAvNDX?usp=sharing) se clona el repositorio para correr los métodos necesarios de extracción y transformación/limpieza de datos. Pruébalo!
+En este [notebook en Google Colab](https://colab.research.google.com/drive/1fNgV-kOV78WTfJpHRH98-ArWTNuAvNDX?usp=sharing) se clona el repositorio para correr los métodos necesarios de extracción, transformación, limpieza y predicción. 
+¡Pruébalo!
 
 # Índice
 - [x] [Repositorio](#Repositorio)
 - [x] [Extracción](#Extracción)
 - [x] [Transformación](#Transformación)
 - [ ] [Modelos](#Modelos)
-- [x]       [¿La persona NO trae lentes?]
-- [ ]       [Aplicar fondo blanco] (en progreso ... )
+- [x]       ¿La persona NO trae lentes?
+- [ ]       Aplicar fondo blanco (en progreso ... )
 - [ ] [Puesta en producción](#Puesta-en-producción) (en progreso ... )
 
 <br>
