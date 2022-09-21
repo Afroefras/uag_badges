@@ -21,13 +21,14 @@ En este [notebook en Google Colab](https://colab.research.google.com/drive/1fNgV
 
 # Repositorio:
     .
-    ├── __init__.py             # Para que el directorio se trabaje de forma modular
+    ├── __init__.py         # Para que el directorio se trabaje de forma modular
     │
-    ├── main.py                 # Hereda GetEmailData y TransformData para obtener y limpiar las imágenes
-    ├── get_email_data.py       # Permite iniciar sesión en @edu.uag.mx para importar todas las imágenes adjuntas en la bandeja de entrada de un rango específico de fechas
-    ├── transform.py            # Limpia los datos y crea variables de utilidad
+    ├── main.py             # Hereda GetEmailData, TransformData y GetModel para obtener, limpiar las imágenes y predecir si la persona NO tiene lentes
+    ├── get_email_data.py   # Permite iniciar sesión en @edu.uag.mx para importar todas las imágenes adjuntas en la bandeja de entrada de un rango específico de fechas
+    ├── transform.py        # Limpia los datos y crea variables de utilidad
+    ├── get_model.py        # Extrae el ZIP desde GoogleDrive con el modelo entrenado (99.4% en val) para aplicarlo en las imágenes recibidas por correo
     │
-    └── requirements.txt        # Instalar las librerías necesarias con el comando: pip install -r requirements.txt
+    └── requirements.txt    # Instalar las librerías necesarias con el comando: pip install -r requirements.txt
 
 <br>
 
