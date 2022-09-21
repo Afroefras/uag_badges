@@ -83,6 +83,12 @@ Así, el DataFrame ahora tiene dos columnas adicionales, que indican:
 |  0 |  001 |...|           0.842446 |            1 |
 |  5 |  007 |...|           0.204064 |            0 |
 
+<br>
+
+No glasses proba: 84.24%             |  No glasses proba: 20.40% 
+:-------------------------:|:-------------------------:
+![](https://github.com/Afroefras/uag_badges/blob/main/media/Diego%20Flores.png)  |  ![](https://github.com/Afroefras/uag_badges/blob/main/media/lentes.jpeg)
+
 <br><br>
 
 ## Aplicar fondo blanco 
