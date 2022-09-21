@@ -1,12 +1,14 @@
 try: 
     from .get_email_data import GetEmailData
     from .transform_data import TransformData
+    from .get_model import GetModel
 except ImportError: 
     from get_email_data import GetEmailData
     from transform_data import TransformData
+    from get_model import GetModel
 
 
-class CredencialesUAG(GetEmailData, TransformData):
+class CredencialesUAG(GetEmailData, TransformData, GetModel):
     def get_data(self) -> None:
         self.login()        
         self.filter_msg_dates(filter_from='INBOX')
@@ -22,10 +24,24 @@ class CredencialesUAG(GetEmailData, TransformData):
         self.last_img()
         self.convert_png()
 
+    def get_model(self) -> None:
+        self.get_model_zip()
+        self.import_model()
+        
+    def predict_glasses(self, threshold: float) -> None:
+        self.df['no_glasses_proba'] = self.df['file_dir'].map(self.model_predict)
+        self.df['no_glasses_proba'] = self.df['no_glasses_proba'].map(lambda x: x[0][0])
+        self.df['no_glasses'] = self.df['no_glasses_proba'].map(lambda x: 1 if x >= threshold else 0)
+
 if __name__ == '__main__':
-    # user = input('Usuario: ')
-    user = 'efrain.flores'
-    cuag = CredencialesUAG(user, date_from='14-sep-2022', date_to='14-sep-2022')
-    cuag.get_data()
-    cuag.transform_data()
-    print(cuag.df.head())
+    USER = input('Usuario: ')
+    uag = CredencialesUAG(USER, date_from='9-sep-2022', date_to='21-sep-2022')
+    uag.get_data()
+    uag.transform_data()
+
+    MODEL_ID = '1E2Ducc4YQmf_lrStZARZT4t-rr5UWVZj'
+    uag.set_model_env(MODEL_ID, model_name='CLoSL')
+    uag.get_model()
+    uag.predict_glasses(threshold=0.5)
+
+    print(uag.df.head())

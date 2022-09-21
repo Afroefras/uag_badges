@@ -58,8 +58,8 @@ class GetEmailData:
     def filter_msg_dates(self, filter_from: str) -> None:
         self.imap.select(filter_from)
 
-        for date_check in (self.date_from, self.date_to):
-            date_check = self.get_month(date_check, date_sep='-')
+        self.date_from = self.get_month(self.date_from, date_sep='-')
+        self.date_to = self.get_month(self.date_to, date_sep='-')
 
         _date_to = self.add_n_days(self.date_to, date_format=r'%d-%b-%Y', n_days=1)
         to_filter = f'(SINCE "{self.date_from}" BEFORE "{_date_to}")'

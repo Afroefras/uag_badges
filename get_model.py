@@ -7,8 +7,11 @@ from PIL.Image import open as open_img
 
 from keras.models import load_model
 
-class ModelPredict:
-    def __init__(self, google_drive_file_id: str, model_name: str, base_dir: str=None) -> None:
+class GetModel:
+    def __init__(self) -> None:
+        pass
+    
+    def set_model_env(self, google_drive_file_id: str, model_name: str, base_dir: str=None) -> None:
         '''
         Sólo recibe el identificador en Google Drive y la clase cuenta con los métodos suficientes para:
             - entrenamiento
@@ -22,7 +25,6 @@ class ModelPredict:
         self.model_name = model_name
         self.model_dir = self.base_dir.joinpath('models')
         self.model_dir.mkdir(exist_ok=True)
-
 
     def get_model_zip(self) -> None:
         '''
@@ -45,7 +47,7 @@ class ModelPredict:
                 z.extractall(self.model_dir)
 
 
-    def get_model(self) -> None:
+    def import_model(self) -> None:
         self.model = load_model(self.model_dir.joinpath(self.model_name))
 
 
