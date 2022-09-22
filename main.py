@@ -9,6 +9,12 @@ except ImportError:
 
 
 class CredencialesUAG(GetEmailData, TransformData, GetModel):
+    def __init__(self, domain: str = '@edu.uag.mx', server: str = 'outlook.office365.com') -> None:
+        self.date_from = input('En formato dd-mmm-yyyy\n\nFecha inicial: ').lower()
+        self.date_to = input('Fecha final: ').lower()
+        self.username = input('Usuario (sólo nombre de usuario, sin @edu.uag.mx, ej: efrain.flores: ').lower()
+        super().__init__(domain, server)
+
     def get_data(self) -> None:
         self.login()        
         self.filter_msg_dates(filter_from='INBOX')
@@ -33,15 +39,15 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel):
         self.df['no_glasses_proba'] = self.df['no_glasses_proba'].map(lambda x: x[0][0])
         self.df['no_glasses'] = self.df['no_glasses_proba'].map(lambda x: 1 if x >= threshold else 0)
 
+
+    def run(self) -> None:
+        self.get_data()
+        self.transform_data()
+        self.set_model_env('1E2Ducc4YQmf_lrStZARZT4t-rr5UWVZj', model_name='CLoSL')
+        self.get_model()
+        self.predict_glasses(threshold=0.5)
+
 if __name__ == '__main__':
-    USER = input('Usuario: ')
-    uag = CredencialesUAG(USER, date_from='9-sep-2022', date_to='21-sep-2022')
-    uag.get_data()
-    uag.transform_data()
-
-    MODEL_ID = '1E2Ducc4YQmf_lrStZARZT4t-rr5UWVZj'
-    uag.set_model_env(MODEL_ID, model_name='CLoSL')
-    uag.get_model()
-    uag.predict_glasses(threshold=0.5)
-
+    uag = CredencialesUAG()
+    uag.run()
     print(uag.df.head())

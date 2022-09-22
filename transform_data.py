@@ -5,6 +5,9 @@ from PIL.Image import open as open_img, new as new_img
 
 
 class TransformData:
+    def __init__(self) -> None:
+        pass
+
     def get_email(self, col_from: str) -> None:
         self.df = DataFrame(self.files_list)
         email_pattern = r'([a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*)>$'

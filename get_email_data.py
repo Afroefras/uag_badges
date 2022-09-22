@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 
 
 class GetEmailData:
-    def __init__(self, username: str, date_from: str, date_to: str, domain: str='@edu.uag.mx', server: str='outlook.office365.com') -> None:
+    def __init__(self, domain: str='@edu.uag.mx', server: str='outlook.office365.com') -> None:
         '''
         use your email provider's IMAP server, you can look for your provider's IMAP server on Google
         or check this page: https://www.systoolsgroup.com/imap/
@@ -14,14 +14,11 @@ class GetEmailData:
         '''
         self.server = server
         self.domain = domain.lower()
-        self.username = username.lower()
         self.user_email = self.username + self.domain
-        self.date_from = date_from.lower()
-        self.date_to = date_to.lower()
 
 
     def login(self) -> None: 
-        password = getpass('Contraseña:\n')
+        password = getpass('Contraseña: ')
         self.imap = IMAP4_SSL(self.server)
         self.imap.login(self.user_email, password)
 
