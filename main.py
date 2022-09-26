@@ -48,7 +48,7 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
         self.zip_dir()
 
     def run(self) -> None:
-        print(f'Obteniendo correos de {self.user_email} desde {self.dates_range} ...')
+        print(f'Obteniendo correos de {self.user_email} ...')
         self.get_data()
         print(f'Limpiando datos ...')
         self.transform_data()
