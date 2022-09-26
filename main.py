@@ -11,15 +11,10 @@ except ImportError:
 
 
 class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
-    def __init__(self, test: bool=False, domain: str = '@edu.uag.mx', server: str = 'outlook.office365.com') -> None:
-        if test:
-            self.date_from = '21-sep-2022'
-            self.date_to = '21-sep-2022'
-            self.username = 'efrain.flores'
-        else:
-            self.date_from = input('\n(En formato dd-mmm-yyyy, ej: 22-sep-2022)\nFecha inicial: ').lower()
-            self.date_to = input('Fecha final: ').lower()
-            self.username = input('\n\nSólo nombre de usuario, sin @edu.uag.mx, ej: efrain.flores\nUsuario: ').lower()
+    def __init__(self, domain: str = '@edu.uag.mx', server: str = 'outlook.office365.com') -> None:
+        self.date_from = input('\n(En formato dd-mmm-yyyy, ej: 22-sep-2022)\nFecha inicial: ').lower()
+        self.date_to = input('Fecha final: ').lower()
+        self.username = input('\n\nSólo nombre de usuario, sin @edu.uag.mx, ej: efrain.flores\nUsuario: ').lower()
         super().__init__(domain, server)
 
     def get_data(self) -> None:
@@ -48,13 +43,13 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
         self.import_model()
         self.predict_glasses(threshold=0.5)
 
-    def export_data(self) -> None:
+    def export_data(self, send_response: bool) -> None:
         self.split_imgs(prediction_col='no_glasses')
         self.zip_dir()
         self.write_msg(options_send_to=[0])
-        self.send_response()
+        if send_response: self.send_response()
 
-    def run(self) -> None:
+    def run(self, **kwargs) -> None:
         self.get_data()
         print(f'\n\nObteniendo correos de {self.user_email} ...')
         print(f'Limpiando datos ...')
@@ -62,10 +57,11 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
         print(f'Importando modelos ...')
         self.get_model()
         print(f'Exportando resultados ...')
-        self.export_data()
-        print(f'Listo, {len(self.send_to)} ({len(self.send_to)/len(self.df):0%}%) correos han sido contestados.\nEn unos momentos se descargarán los resultados :)')
+        self.export_data(**kwargs)
+        incorrect = len(self.send_to.split(', '))
+        print(f'\nListo, {incorrect} ({incorrect/len(self.df):.0%}%) fueron fotos incorrectas.\nEn unos momentos se descargarán los resultados :)')
 
 if __name__ == '__main__':
-    uag = CredencialesUAG(test=True)
+    uag = CredencialesUAG()
     uag.run()
     print(uag.df.head())

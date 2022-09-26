@@ -1,5 +1,5 @@
+from smtplib import SMTP
 from shutil import make_archive
-from smtplib import SMTP, SMTP_SSL, SMTP_SSL_PORT
 
 class ExportData:
     def __init__(self) -> None:
@@ -32,7 +32,6 @@ class ExportData:
         
         self.msg = f'From: {self.user_email}\r\n'
         self.msg += f'To: {self.send_to}\r\n'
-        # self.msg += f'To: {self.send_to}\r\n\r\n'
         self.msg += 'Subject: Foto para credencial incorrecta\r\n\r\n'
         self.msg += '''
 Hola!
