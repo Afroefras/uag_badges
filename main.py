@@ -46,7 +46,6 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
     def export_data(self) -> None:
         self.split_imgs(prediction_col='no_glasses')
         self.zip_dir()
-        self.download_zip()
 
     def run(self) -> None:
         self.get_data()

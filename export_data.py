@@ -17,6 +17,3 @@ class ExportData:
     def zip_dir(self) -> None:
         make_archive(self.dates_range, 'zip', self.base_dir)
         self.zip_dir = self.base_dir.joinpath(self.dates_range + '.zip')
-
-    def download_zip(self) -> None:
-        download(self.zip_dir)
