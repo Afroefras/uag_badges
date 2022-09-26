@@ -11,10 +11,15 @@ except ImportError:
 
 
 class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
-    def __init__(self, domain: str = '@edu.uag.mx', server: str = 'outlook.office365.com') -> None:
-        self.date_from = input('\nEn formato dd-mmm-yyyy\n\nFecha inicial: ').lower()
-        self.date_to = input('Fecha final: ').lower()
-        self.username = input('\n\nSólo nombre de usuario, sin @edu.uag.mx, ej: efrain.flores\nUsuario: ').lower()
+    def __init__(self, test: bool=False, domain: str = '@edu.uag.mx', server: str = 'outlook.office365.com') -> None:
+        if test:
+            self.date_from = '21-sep-2022'
+            self.date_to = '21-sep-2022'
+            self.username = 'efrain.flores'
+        else:
+            self.date_from = input('\n(En formato dd-mmm-yyyy, ej: 22-sep-2022)\nFecha inicial: ').lower()
+            self.date_to = input('Fecha final: ').lower()
+            self.username = input('\n\nSólo nombre de usuario, sin @edu.uag.mx, ej: efrain.flores\nUsuario: ').lower()
         super().__init__(domain, server)
 
     def get_data(self) -> None:
@@ -46,6 +51,8 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
     def export_data(self) -> None:
         self.split_imgs(prediction_col='no_glasses')
         self.zip_dir()
+        self.write_msg(options_send_to=[0])
+        self.send_response()
 
     def run(self) -> None:
         self.get_data()
@@ -56,9 +63,9 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
         self.get_model()
         print(f'Exportando resultados ...')
         self.export_data()
-        print('Listo')
+        print(f'Listo, {len(self.send_to)} ({len(self.send_to)/len(self.df):0%}%) correos han sido contestados.\nEn unos momentos se descargarán los resultados :)')
 
 if __name__ == '__main__':
-    uag = CredencialesUAG()
+    uag = CredencialesUAG(test=True)
     uag.run()
     print(uag.df.head())

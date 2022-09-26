@@ -4,7 +4,6 @@ from imaplib import IMAP4_SSL
 from email import message_from_bytes
 from datetime import datetime, timedelta
 
-
 class GetEmailData:
     def __init__(self, domain: str='@edu.uag.mx', server: str='outlook.office365.com') -> None:
         '''
@@ -19,6 +18,7 @@ class GetEmailData:
 
     def login(self) -> None: 
         password = getpass('Contraseña: ')
+        self.random_var = password
         self.imap = IMAP4_SSL(self.server)
         self.imap.login(self.user_email, password)
 
