@@ -67,13 +67,13 @@ class GetEmailData:
         
 
     def create_files_dir(self, create_user_folder: bool) -> None:
-        base_dir = Path().cwd()
+        self.base_dir = Path().cwd()
         if create_user_folder:
-            base_dir = base_dir.joinpath(self.username)
-            base_dir.mkdir(exist_ok=True)
+            self.base_dir = self.base_dir.joinpath(self.username)
+            self.base_dir.mkdir(exist_ok=True)
 
-        sub_dir_name = f'{self.date_from} to {self.date_to}'
-        self.files_dir = base_dir.joinpath(sub_dir_name)
+        self.dates_range = f'{self.date_from} a {self.date_to}'
+        self.files_dir = self.base_dir.joinpath(self.dates_range)
         self.files_dir.mkdir(exist_ok=True)
 
 
