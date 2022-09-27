@@ -32,9 +32,14 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
         self.last_img()
         self.convert_png()
         
+    def check_color(self, img_dir) -> int:
+        if not self.is_color(img_dir):
+            return 0
+        else: return self.model_predict(img_dir)[0][0]
+
     def predict_glasses(self, threshold: float) -> None:
-        self.df['no_glasses_proba'] = self.df['file_dir'].map(self.model_predict)
-        self.df['no_glasses_proba'] = self.df['no_glasses_proba'].map(lambda x: x[0][0])
+        self.df['is_color'] = self.df['file_dir'].map(self.is_color)*1
+        self.df['no_glasses_proba'] = self.df['file_dir'].map(self.check_color)
         self.df['no_glasses'] = self.df['no_glasses_proba'].map(lambda x: 1 if x >= threshold else 0)
 
     def get_model(self) -> None:
@@ -63,5 +68,5 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
 
 if __name__ == '__main__':
     uag = CredencialesUAG()
-    uag.run()
+    uag.run(send_response=False)
     print(uag.df.head())

@@ -6,6 +6,7 @@ class ExportData:
         pass
 
     def split_imgs(self, prediction_col: str) -> None:
+        new_dir_col = []
         for img, prediction in zip(self.df['file_dir'], self.df[prediction_col]):
             to_dir = f'{prediction_col}_{prediction}'
 
@@ -13,12 +14,16 @@ class ExportData:
             new_path = prev_path.joinpath(to_dir)
             new_path.mkdir(exist_ok=True)
 
-            img.rename(new_path.joinpath(img.name))
+            new_dir = new_path.joinpath(img.name)
+            img.rename(new_dir)
+            new_dir_col = new_dir
         
+        self.df['file_dir'] = new_dir_col
         self.prediction_col = prediction_col
 
 
     def zip_dir(self) -> None:
+        self.df.to_csv(self.files_dir.joinpath('result.csv', index=False))
         make_archive(self.dates_range, 'zip', self.files_dir)
         self.zip_dir = self.base_dir.joinpath(self.dates_range + '.zip')
 

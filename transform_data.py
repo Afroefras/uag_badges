@@ -63,3 +63,14 @@ class TransformData:
                 jpg_info.append((True, img_name, self.files_dir.joinpath(img_name)))
         
         self.df[['is_jpg','filename','file_dir']] = jpg_info
+
+
+    def is_color(self, img_dir: str) -> int:
+        img = open_img(img_dir)
+        w, h = img.size
+        for i in range(w):
+            for j in range(h):
+                r, g, b = img.getpixel((i,j))
+                if r != g != b: 
+                    return True
+        return False

@@ -2,7 +2,7 @@ from pathlib import Path
 from zipfile import ZipFile
 from requests import Session
 
-from numpy import asarray, argmax
+from numpy import asarray
 from PIL.Image import open as open_img
 
 from keras.models import load_model
