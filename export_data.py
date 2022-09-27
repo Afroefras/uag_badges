@@ -45,8 +45,8 @@ Estás recibiendo este correo porque nuestro modelo detectó que la foto enviada
 
 Los requisitos para la foto de credencial UAG son:
     1. No uso de lentes
-    2. La fotografía debe ser Digital y a color en un fondo blanco (no se permiten fotografías de fotos o escáner de fotos anteriores)  
-    3. Uso de uniforme (Medicina, Odontología, Terapia Física, Educación Básica desde kínder hasta preparatoria) .
+    2. La fotografía debe ser digital y a color en un fondo blanco (no se permiten fotografías de fotos o escáner de fotos anteriores)  
+    3. Uso de uniforme (Medicina, Odontología, Terapia Física, Educación Básica desde kínder hasta preparatoria)
         - si no eres de las carreras anteriores usa vestimenta formal o casual (mujeres no escotes ni transparencias)
     4. Fotografía de frente (no selfie, no perfil)  
 
