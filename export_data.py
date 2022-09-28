@@ -23,7 +23,7 @@ class ExportData:
 
 
     def zip_dir(self) -> None:
-        self.df.to_csv(self.files_dir.joinpath('result.csv', index=False))
+        self.df.to_csv(self.files_dir.joinpath('result.csv'), index=False)
         make_archive(self.dates_range, 'zip', self.files_dir)
         self.zip_dir = self.base_dir.joinpath(self.dates_range + '.zip')
 
