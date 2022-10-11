@@ -74,6 +74,7 @@ class TransformData:
 
 
     def is_color(self, img_dir: str) -> bool:
+        print(img_dir)
         img = open_img(img_dir)
         w, h = img.size
         for i in range(w):

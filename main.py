@@ -11,10 +11,15 @@ except ImportError:
 
 
 class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
-    def __init__(self, domain: str = '@edu.uag.mx', server: str = 'outlook.office365.com') -> None:
-        self.date_from = input('\n(En formato dd-mmm-yyyy, ej: 22-sep-2022)\nFecha inicial: ').lower()
-        self.date_to = input('Fecha final: ').lower()
-        self.username = input('\n\nSólo nombre de usuario, sin @edu.uag.mx, ej: efrain.flores\nUsuario: ').lower()
+    def __init__(self, domain: str='@edu.uag.mx', server: str='outlook.office365.com', is_test: bool=False) -> None:
+        if is_test:
+            self.date_from = '11-oct-2022'
+            self.date_to = '11-oct-2022'
+            self.username = 'efrain.flores'
+        else:
+            self.date_from = input('\n(En formato dd-mmm-yyyy, ej: 22-sep-2022)\nFecha inicial: ').lower()
+            self.date_to = input('Fecha final: ').lower()
+            self.username = input('\n\nSólo nombre de usuario, sin @edu.uag.mx, ej: efrain.flores\nUsuario: ').lower()
         super().__init__(domain, server)
 
     def get_data(self) -> None:
@@ -68,6 +73,7 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
         print(f'\nListo, proceso terminado!\n{incorrect} ({incorrect/len(self.df):.0%}) fotos fueron fotos incorrectas.\n\nEn unos momentos se descargarán los resultados :)')
 
 if __name__ == '__main__':
-    uag = CredencialesUAG()
+    uag = CredencialesUAG(is_test=True)
     uag.run(send_response=False)
     print(uag.df.head())
+    print(uag.df.head(1).T)
