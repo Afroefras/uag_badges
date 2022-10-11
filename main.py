@@ -41,6 +41,7 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
         self.df['is_color'] = self.df['file_dir'].map(self.is_color)*1
         self.df['no_glasses_proba'] = self.df['file_dir'].map(self.check_color)
         self.df['no_glasses'] = self.df['no_glasses_proba'].map(lambda x: 1 if x >= threshold else 0)
+        self.df[['file_dir','no_glasses']].apply(lambda x: self.remove_background(x[0]) if x[-1]==1 else None, axis=1)
 
     def get_model(self) -> None:
         self.set_model_env('1E2Ducc4YQmf_lrStZARZT4t-rr5UWVZj', model_name='CLoSL')

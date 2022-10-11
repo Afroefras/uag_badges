@@ -1,6 +1,7 @@
 from re import findall
 from dateutil import tz
 from pandas import DataFrame, to_datetime
+from rembg import remove as rem_background
 from PIL.Image import open as open_img, new as new_img
 
 
@@ -40,12 +41,19 @@ class TransformData:
                 pic.unlink()
 
     
-    def png_to_jpg(self, img_dir: str, img_name: str) -> None:
-        png = open_img(img_dir.joinpath(img_name)).convert('RGBA')
+    def png_to_jpg(self, img) -> None:
+        png = img.convert('RGBA')
         png.load()
 
         jpg = new_img("RGB", png.size, (255, 255, 255))
         jpg.paste(png, mask=png.split()[3])
+        return jpg
+
+
+    def load_png_save_jpg(self, img_dir: str, img_name: str) -> None:
+        png = open_img(img_dir.joinpath(img_name))
+        
+        jpg = self.png_to_jpg(png)
 
         jpg_name = ''.join(img_name.split('.')[:-1])+'.jpg'
         jpg.save(img_dir.joinpath(jpg_name), 'JPEG', quality=100)
@@ -56,7 +64,7 @@ class TransformData:
         jpg_info = []
         for img_name, img_ext in zip(self.df['filename'], self.df['file_ext']):
             if img_ext=='png':
-                jpg_name = self.png_to_jpg(self.files_dir, img_name)
+                jpg_name = self.load_png_save_jpg(self.files_dir, img_name)
                 self.files_dir.joinpath(img_name).unlink()
                 jpg_info.append((False, jpg_name, self.files_dir.joinpath(jpg_name)))
             else: 
@@ -65,7 +73,7 @@ class TransformData:
         self.df[['is_jpg','filename','file_dir']] = jpg_info
 
 
-    def is_color(self, img_dir: str) -> int:
+    def is_color(self, img_dir: str) -> bool:
         img = open_img(img_dir)
         w, h = img.size
         for i in range(w):
@@ -74,3 +82,10 @@ class TransformData:
                 if r != g != b: 
                     return True
         return False
+
+    
+    def remove_background(self, img_dir: str) -> None:
+        img = open_img(img_dir)
+        new_img = rem_background(img)
+        new_img = self.png_to_jpg(new_img)
+        new_img.save(img_dir, 'JPEG', quality=100)
