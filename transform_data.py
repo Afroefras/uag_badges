@@ -12,13 +12,11 @@ class TransformData:
     def __init__(self) -> None:
         pass
 
-    def get_email(self, col_from: str) -> None:
+    def just_img(self, valid_ext: list) -> None:
         self.df = DataFrame(self.files_list)
 
-        email_pattern = r'([a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*)>$'
-        self.df['email'] = self.df[col_from].map(lambda x: findall(email_pattern, x)[-1])
-        
-        self.df['is_uag_email'] = self.df['email'].map(lambda x: search('@edu.uag.mx', x) is not None)
+        self.df['file_ext'] = self.df['filename'].str.split('.').str[-1]
+        self.df = self.df[self.df['file_ext'].isin(valid_ext)].copy()
 
 
     def date_vars(self, date_col: str, timezone: str) -> None:
@@ -29,9 +27,11 @@ class TransformData:
         self.date_col = date_col
 
 
-    def just_img(self, valid_ext: list) -> None:
-        self.df['file_ext'] = self.df['filename'].str.split('.').str[-1]
-        self.df = self.df[self.df['file_ext'].isin(valid_ext)].copy()
+    def get_email(self, col_from: str) -> None:
+        email_pattern = r'([a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*)>$'
+        self.df['email'] = self.df[col_from].map(lambda x: findall(email_pattern, x)[-1])
+        
+        self.df['is_uag_email'] = self.df['email'].map(lambda x: search('@edu.uag.mx', x) is not None)
 
 
     def last_email(self) -> None:
@@ -80,7 +80,6 @@ class TransformData:
 
 
     def is_color(self, img_dir: str) -> bool:
-        print(img_dir)
         img = open_img(img_dir)
         w, h = img.size
         for i in range(w):

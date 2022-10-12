@@ -30,9 +30,9 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
         self.finish_session()
 
     def transform_data(self) -> None:
-        self.get_email(col_from='from')
         self.just_img(valid_ext=['png','jpg','jpeg'])
         self.date_vars(date_col='date', timezone='America/Mexico_City')
+        self.get_email(col_from='from')
         self.last_email()
         self.last_img()
         self.convert_png()
@@ -69,11 +69,10 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
         self.get_model()
         print(f'Exportando resultados ...')
         self.export_data(**kwargs)
-        incorrect = len(self.send_to.split(', '))
+        incorrect = len(self.send_to.split(', ') - 1)
         print(f'\nListo, proceso terminado!\n{incorrect} ({incorrect/len(self.df):.0%}) fotos fueron fotos incorrectas.\n\nEn unos momentos se descargarán los resultados :)')
 
 if __name__ == '__main__':
     uag = CredencialesUAG(is_test=True)
     uag.run(send_response=False)
-    print(uag.df.head())
     print(uag.df.head(1).T)
