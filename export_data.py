@@ -30,14 +30,10 @@ class ExportData:
     
     def write_msg(self, options_send_to: list) -> None:
         incorrect_imgs = self.df[self.prediction_col].isin(options_send_to)
-        print(incorrect_imgs)
         incorrect_imgs = self.df['email'][incorrect_imgs]
-        print(incorrect_imgs)
         
         self.send_to = incorrect_imgs.dropna()
-        print(self.send_to)
         self.send_to = ", ".join(self.send_to)
-        print(self.send_to)
         
         self.msg = f'From: {self.user_email}\r\n'
         self.msg += f'To: {self.send_to}\r\n'
