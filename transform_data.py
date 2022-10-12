@@ -1,8 +1,11 @@
-from re import findall
 from dateutil import tz
+from re import findall, search
 from pandas import DataFrame, to_datetime
-from rembg import remove as rem_background
-from PIL.Image import open as open_img, new as new_img
+from cv2 import imread, cvtColor, COLOR_BGR2RGB
+from cvzone.SelfiSegmentationModule import SelfiSegmentation
+from PIL.Image import fromarray, open as open_img, new as new_img
+
+from cvzone.SelfiSegmentationModule import SelfiSegmentation
 
 
 class TransformData:
@@ -11,8 +14,11 @@ class TransformData:
 
     def get_email(self, col_from: str) -> None:
         self.df = DataFrame(self.files_list)
+
         email_pattern = r'([a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*)>$'
         self.df['email'] = self.df[col_from].map(lambda x: findall(email_pattern, x)[-1])
+        
+        self.df['is_uag_email'] = self.df['email'].map(lambda x: search('@edu.uag.mx', x) is not None)
 
 
     def date_vars(self, date_col: str, timezone: str) -> None:
@@ -86,7 +92,12 @@ class TransformData:
 
     
     def remove_background(self, img_dir: str) -> None:
-        img = open_img(img_dir)
-        new_img = rem_background(img)
+        img = imread(str(img_dir))
+        segm = SelfiSegmentation()
+
+        new_img = segm.removeBG(img, (255,255,255), threshold=0.6)
+        new_img = cvtColor(new_img, COLOR_BGR2RGB)
+        new_img = fromarray(new_img)
+
         new_img = self.png_to_jpg(new_img)
         new_img.save(img_dir, 'JPEG', quality=100)

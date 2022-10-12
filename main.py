@@ -31,8 +31,8 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
 
     def transform_data(self) -> None:
         self.get_email(col_from='from')
-        self.date_vars(date_col='date', timezone='America/Mexico_City')
         self.just_img(valid_ext=['png','jpg','jpeg'])
+        self.date_vars(date_col='date', timezone='America/Mexico_City')
         self.last_email()
         self.last_img()
         self.convert_png()
@@ -43,9 +43,9 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
         else: return self.model_predict(img_dir)[0][0]
 
     def predict_glasses(self, threshold: float) -> None:
-        self.df['is_color'] = self.df['file_dir'].map(self.is_color)*1
+        self.df['is_color'] = self.df['file_dir'].map(self.is_color)
         self.df['no_glasses_proba'] = self.df['file_dir'].map(self.check_color)
-        self.df['no_glasses'] = self.df['no_glasses_proba'].map(lambda x: 1 if x >= threshold else 0)
+        self.df['no_glasses'] = self.df['no_glasses_proba'] >= threshold
         self.df[['file_dir','no_glasses']].apply(lambda x: self.remove_background(x[0]) if x[-1]==1 else None, axis=1)
 
     def get_model(self) -> None:
@@ -57,7 +57,7 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
     def export_data(self, send_response: bool) -> None:
         self.split_imgs(prediction_col='no_glasses')
         self.zip_dir()
-        self.write_msg(options_send_to=[0])
+        self.write_msg(options_send_to=[False])
         if send_response: self.send_response()
 
     def run(self, **kwargs) -> None:
