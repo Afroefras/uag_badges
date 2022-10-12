@@ -69,7 +69,9 @@ class CredencialesUAG(GetEmailData, TransformData, GetModel, ExportData):
         self.get_model()
         print(f'Exportando resultados ...')
         self.export_data(**kwargs)
-        incorrect = len(self.send_to.split(', ') - 1)
+        
+        if self.send_to == '': incorrect = 0
+        else: incorrect = len(self.send_to.split(', '))
         print(f'\nListo, proceso terminado!\n{incorrect} ({incorrect/len(self.df):.0%}) fotos fueron fotos incorrectas.\n\nEn unos momentos se descargarán los resultados :)')
 
 if __name__ == '__main__':
